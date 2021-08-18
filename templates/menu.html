@@ -1,0 +1,64 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+    <!-- Bootstrap CSS -->
+    
+    <title>{% block title %}Food Menu{% endblock title %}</title>
+
+  </head>
+
+  {% block content %}
+  <body>
+
+     <div class="album py-5 bg-light">
+        <div class="container">
+     
+          <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for listoffood in FoodMenu_list %}
+            <div class="col">
+      
+             <div class="card shadow-sm">
+               <a class="food-image" href="{{ listoffood.get_absolute_url }}">
+                 <img class="foodimage" src="{{ listoffood.foodmenus.url}}" alt="{{ listoffood.title }}" width="100%" height="225" >
+               </a>
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+      
+                <div class="card-body">
+                  <p class="card-text"> {{ listoffood.title }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href= "#" class="btn btn-outline-danger me-md-2" type="button">ADD TO CART</a>
+                      <button type="button" class="btn btn-sm btn-outline-danger">ORDER NOW</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+             </div>
+              <div class=" bottompadding pb-3"></div>
+  
+            </div>
+              {% endfor %}
+      
+          </div>
+      
+        
+        </div>
+     </div>
+    
+  </body>
+    {% endblock content %}
+
+
+
+    
+</html>

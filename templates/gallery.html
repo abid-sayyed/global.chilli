@@ -1,0 +1,61 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+    <!-- Bootstrap CSS -->
+    
+    <title>{% block title %}Gallery{% endblock title %}</title>
+
+  </head>
+
+  {% block content %}
+  <body>
+
+     <div class="album py-5 bg-light">
+        <div class="container">
+     
+          <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for listofpic in Gallery_list %}
+            <div class="col">
+      
+             <div class="card shadow-sm">
+               <a class="food-image" href="{{ listofpic.get_absolute_url }}">
+                 <img class="foodimage" src="{{ listofpic.galleypage.url}}" alt="{{ listofpic.title }}" width="100%" height="230" >
+               </a>
+               
+                <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+      
+                <!-- <div class="card-body pt-2 pb-0"> -->
+                  <!-- <p class="card-text "> {{ listofpic.title }}</p> -->
+                  <div class="d-flex justify-content-between align-items-center">
+                    <!-- <small class="text-muted">9 mins</small> -->
+                  </div>
+                <!-- </div> -->
+             </div>
+              <div class=" bottompadding pb-2"></div>
+  
+            </div>
+              {% endfor %}
+      
+          </div>
+      
+        
+        </div>
+     </div>
+    
+  </body>
+    {% endblock content %}
+
+
+
+    
+</html>

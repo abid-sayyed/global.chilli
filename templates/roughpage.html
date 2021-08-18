@@ -1,0 +1,409 @@
+<!-- 
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+    
+    <title>{% block title %}Home{% endblock title %}</title>
+
+  </head>
+
+  {% block content %}
+  <body>
+    <div class="card text-white p-0 mt-0">
+      
+      <img src="{% static 'images/homepagepic.jpg' %}" class="card-img bg-transparent" alt="image">
+      <div class="card-img-overlay">
+        <div class="card-body">
+         <h1 class="card-title text-dark text-start text-wrap">Welcome to Global.Chilli</h1>
+         <a href="#" class="btn btn-primary">Go somewhere</a>
+         <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+ 
+    <p class="card-text">Last updated 3 mins ago</p> -->
+
+      <!-- </div>
+      
+    </div>
+
+
+ </body>
+  
+    {% endblock content %}
+</html> -->
+
+
+
+
+
+
+<!-- 
+
+{% extends '_base.html' %}
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <title>{% block title %}Blog List{% endblock title %}</title>
+  </head>
+
+  <body>
+    {% block content %}
+    <section id="bloglist" class="bloglist">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 pt-5 pb-md-4">
+            {% for listofblog in blogs_list %}
+
+            <div class="card shadow">
+              <a class="blog-image" href="{{ listofblog.get_absolute_url }}">
+                <img
+                  src="{% static 'images/logo.png' %}"
+                  class="card-img-top"
+                  alt="image"
+                  height="430"
+                />
+              </a>
+              <div class="card-body px-4">
+                <h2>
+                  <a
+                    href="{{ listofblog.get_absolute_url }}"
+                    class="card-title text-decoration-none fst-normal text-dark pb-2">
+                    {{ listofblog.title }}
+                  </a>
+                </h2>
+
+                <a
+                  href="#"
+                  class="bi bi-person text-decoration-none fw-lighter text-dark">
+                  &nbspAbid Sayyed
+                </a>
+                <time class="px-2 bi bi-clock fw-lighter">
+                  <b>&nbsp</b>{{ listofblog.publish_date }}
+                </time>
+
+                <p class="card-text fw-normal pt-3">
+                  {{ listofblog.body_text|truncatewords:30}}
+                </p>
+
+                <div class="d-flex justify-content-end">
+                  <a
+                    href="{{ listofblog.get_absolute_url }}"
+                    class="btn btn-danger"
+                    >Read More
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="pb-5"></div>
+
+            {% endfor %}
+          </div>
+
+          <div class="col-sm-4 pt-md-5 pb-5">
+            <div class="card shadow">
+              <div class="card-body">
+                <div><h4 class="sidebar-title pt-3 pb-3">Recent Posts</h4></div>
+
+                {% for listofblog in blogs_list%}
+
+                <div class="d-flex flex-row">
+                  <img
+                    src="{% static 'images/logo.png' %}"
+                    class="d-flex justify-content-between"
+                    alt="image"
+                    width="85"
+                  />
+                  <h6>
+                    <a
+                      href="{{ listofblog.get_absolute_url }}"
+                      class="d-flex justify-content-between ps-2 pt-3 text-decoration-none fst-normal text-dark pb-2">
+                      {{ listofblog.title }}
+                    </a>
+                  </h6>
+                </div>
+
+                <div>
+                  <p class="card-text">
+                    <small
+                      class="d-flex pb-4 pt-0 pe-5 justify-content-end text-muted">
+                      {{ listofblog.publish_date }}
+                    </small>
+                  </p>
+                </div>
+
+                {% endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock content %}
+  </body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        {% for listoffood in FoodMenu_list %}
+
+        <div class="card shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+          <div class="card-body">
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+              </div>
+              <small class="text-muted">9 mins</small>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+    <!-- Bootstrap CSS -->
+    
+    <title>{% block title %}Galler{% endblock title %}</title>
+
+  </head>
+
+<body>
+{% block content %}
+
+<!-- Gallery -->
+<div class="row">
+    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+      <img
+        src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt=""
+      />
+  
+      <img
+        src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt=""
+      />
+    </div>
+  
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <img
+        src="https://mdbootstrap.com/img/Photos/Vertical/mountain2.jpg"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt=""
+      />
+  
+      <img
+        src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt=""
+      />
+    </div>
+  
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <img
+        src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt=""
+      />
+  
+      <img
+        src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt=""
+      />
+    </div>
+  </div>
+  <!-- Gallery -->
+</body>
+{% endblock content %}
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+      <section id="foodmenulist" class="menulist">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 pt-5 pb-md-4">
+              {% for listoffood in FoodMenu_list %}
+  
+              <div class="card shadow">
+                <a class="blog-image" href="{{ listoffood.get_absolute_url }}">
+                  <img
+                    src="{% static 'images/logo1.png' %}"
+                    class="card-img-top"
+                    alt="image"
+                    height="75"
+                  />
+                </a>
+                <div class="card-body px-4">
+                  <h2>
+                    <a
+                      href="{{ listoffood.get_absolute_url }}"
+                      class="card-title text-decoration-none fst-normal text-dark pb-2">
+                      {{ listofblog.title }}
+                    </a>
+                  </h2>
+  
+                  <a
+                    href="#"
+                    class="bi bi-person text-decoration-none fw-lighter text-dark">
+                    &nbspAbid Sayyed
+                  </a>
+                  <time class="px-2 bi bi-clock fw-lighter">
+                    <b>&nbsp</b>{{ listoffood.publish_date }}
+                  </time>
+  
+                  <p class="card-text fw-normal pt-3">
+                    {{ listoffood.body_text|truncatewords:30}}
+                  </p>
+  
+                  <div class="d-flex justify-content-end">
+                    <a
+                      href="{{ listoffood.get_absolute_url }}"
+                      class="btn btn-danger"
+                      >Read More
+                    </a>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="pb-5"></div>
+  
+              {% endfor %}
+            </div>
+  
+           
+          </div>
+        </div>
+      </section> -->
+
+
+
+
+
+
+
+
+
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+    <!-- Bootstrap CSS -->
+    
+    <title>{% block title %}Food Menu{% endblock title %}</title>
+
+  </head>
+
+  {% block content %}
+  <body>
+
+     <div class="album py-5 bg-light">
+        <div class="container">
+
+
+
+        </div>
+     
+     </div>
+    
+  </body>
+    {% endblock content %}
+
+
+
+    
+</html>
