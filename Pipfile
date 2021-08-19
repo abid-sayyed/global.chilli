@@ -8,6 +8,8 @@ django = "*"
 mysqlclient = "*"
 pillow = "*"
 typing-extensions = "*"
+django-allauth = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 

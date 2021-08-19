@@ -41,7 +41,7 @@
           </button>
   
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav flex-row me-md-auto d-md-flex me-auto px-4 mb-2 mb-lg-0">
+            <ul class="navbar-nav flex-row me-md-auto d-md-flex me-auto px-2 mb-2 mb-lg-0">
               
               <li class="nav-item p-2">
                 <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
@@ -52,15 +52,28 @@
               <li class="nav-item p-2">
                 <a class="nav-link active" href="{% url 'about' %}">About</a>
               </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item p-2">
+                <a class="nav-link active" href="#">Order</a>
+              </li>
               <li class="nav-item p-2 dropdown">
+                <a class="nav-link active dropdown-toggle " style="text-transform: uppercase;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ user.username }}
+                </a>
+              </a>
+              <ul class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
+                {% else %}
+                <li class="nav-item p-2 dropdown">
                 <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Account
                 </a>
                 <ul class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Sign In</a></li>
-                  <li><a class="dropdown-item" href="#">Registration</a></li>
+                  <li><a class="dropdown-item" href="{% url 'account_login' %}">Sign In</a></li>
+                  <li><a class="dropdown-item" href="{% url 'account_signup' %}">Registration</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'menu' %}">Menu</a></li>
+                  {% endif %}
+                  <!-- <li><a class="dropdown-item" href="{% url 'menu' %}">Menu</a></li> -->
                 </ul>
               </li>
             </ul>
@@ -68,6 +81,7 @@
         </div>
       </nav>
     </div>
+
 
     {% block content %}
 

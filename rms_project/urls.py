@@ -22,7 +22,8 @@ urlpatterns = [
     #Django admin
     path('admin/', admin.site.urls),
 
-    #user management
+    #for account management
+    path('accounts/', include('allauth.urls')), # new
     
 
     #Local apps

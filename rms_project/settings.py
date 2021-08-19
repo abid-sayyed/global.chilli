@@ -37,10 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # new- uses for SITE_ID
+
+    #Third party
+    'crispy_forms', # new
+    'allauth',
+    'allauth.account',
 
 
+
+     #local
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
+    
 
 
 ]
@@ -148,3 +157,36 @@ MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# django-allauth config
+
+LOGIN_REDIRECT_URL = 'home'
+
+LOGOUT_REDIRECT_URL = 'home'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
+
+
+
+SITE_ID = 1 # This means there is only one site currently in django
+# ACCOUNT_SESSION_REMEMBER = True # new - if True it will rember the user and password or viseversa
+
+
+
+#new -for authentication with more method eg with gmail etc
+
+AUTHENTICATION_BACKENDS = (
+'django.contrib.auth.backends.ModelBackend',#  This is already present in djangno so explict added here
+'allauth.account.auth_backends.AuthenticationBackend', # new
+)
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for getting email validation through console
+
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
