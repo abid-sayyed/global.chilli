@@ -28,4 +28,9 @@ urlpatterns = [
 
     #Local apps
     path('',include('pages.urls')),
+
+    path('services/',include('services.urls')),
+
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
