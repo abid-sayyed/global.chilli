@@ -38,12 +38,12 @@
 
               <div class="card-body px-4">
                 <h2 class="card-title pb-2">Welcome to Global.Chilli</h2>
-                 <a href="#" class="bi bi-person text-decoration-none fw-lighter text-dark"> &nbspAbid Sayyed</a>
-                <time class="px-2 bi bi-clock fw-lighter"> &nbsp Feb. 20, 2021 </time>
+                <time class="px-2 bi bi-clock fw-lighter"> &nbsp 5 am to 12 pm </time>
+                <time class="px-2 bi bi-phone fw-lighter"> &nbsp +91 5555 9999 </time>
 
                 <div class="pt-5 pb-5 d-grid gap-4 d-md-flex  justify-content-md-start">
                   <a href= "#" class="btn btn-outline-danger me-md-2" type="button">ORDER ONLINE</a>
-                  <a href= "#" class="btn btn-outline-danger me-md-2" type="button">RESERVATIONS</a>               
+                  <a href= "{% url 'reservation' %}" class="btn btn-outline-danger me-md-2" type="button">RESERVATIONS</a>               
                   <a href="{% url 'menu' %}" class="btn btn-outline-danger me-md-2 " type="button">&nbsp&nbsp&nbsp&nbspMENU&nbsp&nbsp&nbsp&nbsp</a>
                   <a href="{% url 'feedback'%}" class="btn btn-outline-danger" type="button">GIVE FEEDBACK</a>
                 </div>
@@ -53,25 +53,37 @@
             </div>
           </div>
 
-          <div class="col-sm-4 pt-4 pb-5">
+          <div class="col-sm-4 pt-2 pb-5">
             <div class="card shadow">
               <div class="card-body">
           
                <div><h4 class="sidebar-title pt-3 pb-3">Menu</h4></div>
 
-               {% for listofblog in homeblog_list %}
+               {% for listoffood in FoodMenu_HomeList %}
+               <div class="col">
+      
+                <!-- <div class="card shadow-sm"> -->
+                  <a class="food-image" href="{{ listoffood.get_absolute_url }}">
+                    <img class="foodimage" src="{{ listoffood.foodmenu.url}}" alt="{{ listoffood.title }}" width="100%" height="225" >
+                  </a>
+                   <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+         
+                   <div class="card-body">
+                     <h3 class="card-text"> {{ listoffood.title }}</h3>
+                     <div class="d-flex justify-content-between align-items-center">
+                     </div>
+                   </div>
+                </div>     
+               </div>
 
-                <div class="d-flex flex-row">
- 
-                 <img src="{% static 'images/logo.png' %}" class=" d-flex justify-content-between" alt="image" width="85">
-                 <h6><a href="{{ listofblog.get_absolute_url }}" class= " d-flex justify-content-between  ps-2 pt-3 text-decoration-none fst-normal text-dark pb-2"> {{ listofblog.title }}</a></h6>
-                
-                </div>
-
-              <div><p class="card-text"><small class="d-flex pb-4 pt-0 pe-5 justify-content-end text-muted">{{ listofblog.publish_date }}</small></p></div>
 
                
              {% endfor%}
+             <div class="p-3 pt-0 d-grid  d-md-flex  justify-content-md-start">
+              <a href="{% url 'menu'%}" class="btn btn-outline-danger" type="button">More...</a>
+            </div>
+
+
             </div>
           </div>
 

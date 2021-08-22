@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 
 
 from .forms import CustomerCreationForm, CustomUserchangeForm
-
+from .models import CustomerProfile
 
 # Register your models here.
 
@@ -18,6 +18,10 @@ class CustomUserAdmin(UserAdmin):
 
 
 
-    
+class CustomerProfileAdmin(admin.ModelAdmin):
+    model = CustomerProfile(admin.ModelAdmin)
+    list_display = ['profile_username', 'full_name','contact_no','address']
 
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(CustomerProfile, CustomerProfileAdmin)
+

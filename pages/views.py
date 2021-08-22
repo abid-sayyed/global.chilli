@@ -1,9 +1,11 @@
-from pages.models import FoodMenu, Gallery, RestaurantDetail
+from pages.models import FoodMenu, Gallery, HomepageMenu, RestaurantDetail
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 
 # Create your views here.
-class HomePageView(TemplateView):
+class HomePageView(ListView):
+    context_object_name = 'FoodMenu_HomeList'
+    model = HomepageMenu
     template_name = 'pages/home.html'
 
 
