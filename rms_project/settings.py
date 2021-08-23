@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
     'services.apps.ServicesConfig',
+    'core.apps.CoreConfig',
     
 
 

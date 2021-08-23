@@ -29,23 +29,24 @@
       
              <div class="card shadow-sm">
                <a class="food-image" href="{{ item.get_absolute_url }}">
-                 <img class="foodimage" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" alt="{{ listoffood.title }}" width="100%" height="225" >
+                 <img class="foodimage" src="{{ item.item_pic.url}}" alt="{{ listoffood.title }}" width="100%" height="225" >
                </a>
                <!-- "{{ listoffood.foodmenu.url}}" <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
       
                 <div class="card-body">
-                  <a href="{{ item.get_absolute_url }}" class="card-text"> {{ item.item_name }}</a>
+                  <a href="{{ item.get_absolute_url }}" class="card-text text-decoration-none fs-3 fw-bold text-dark"> {{ item.item_name }}</a>
+                  <div>
                   {% if item.discount_price %}
-                  <a href="{{ item.get_absolute_url }}" class="card-text"> {{ item.discount_price }}</a>
+                  <a href="{{ item.get_absolute_url }}" class="card-text text-decoration-none fs-3  fw text-dark"> &#8377{{ item.discount_price }}</a>
                   {% else %}
-                  <a href="{{ item.get_absolute_url }}" class="card-text"> {{ item.price }}</a>
+                  <a href="{{ item.get_absolute_url }}" class="card-text text-decoration-none fa fa-rupee fs-4 fw text-dark "> &#8377 {{ item.price }}</a>
+                  </div>
                   {% endif %}
+
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href= "#" class="btn btn-outline-danger me-md-2" type="button">ADD TO CART</a>
-                      <button type="button" class="btn btn-sm btn-outline-danger">ORDER NOW</button>
+                      <a href= "{{ item.get_absolute_url }}"  class="btn btn-outline-danger me-md-2" type="button">order</a>
                     </div>
-                    <small class="text-muted">9 mins</small>
                   </div>
                 </div>
              </div>
@@ -67,3 +68,4 @@
 
     
 </html>
+<!-- thik hai -->

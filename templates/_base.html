@@ -54,7 +54,7 @@
               </li>
               {% if user.is_authenticated %}
               <li class="nav-item p-2">
-                <a class="nav-link active" href="#">Order</a>
+                <a class="nav-link active" href="{% url 'core:homeage' %}">Order</a>
               </li>
               <li class="nav-item p-2 dropdown">
                 <a class="nav-link active dropdown-toggle " style="text-transform: uppercase;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

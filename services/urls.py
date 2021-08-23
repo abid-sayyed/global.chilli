@@ -1,6 +1,9 @@
 from django .urls import path
 from .views import FeedbackView, ThankyouView, ReservationView, TableConfirmView
 
+# app_name = 'services'
+
+
 urlpatterns = [
     
     path('feedback/',FeedbackView.as_view(), name= 'feedback'),
