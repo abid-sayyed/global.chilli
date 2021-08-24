@@ -20,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
 
 class CustomerProfileAdmin(admin.ModelAdmin):
     model = CustomerProfile(admin.ModelAdmin)
-    list_display = ['profile_username', 'full_name','contact_no','address']
+    list_display = ['profile_username', 'full_name','contact_no','address','picture']
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(CustomerProfile, CustomerProfileAdmin)

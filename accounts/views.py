@@ -1,10 +1,41 @@
-# from django.shortcuts import render
-# from .models import CustomerProfile
-# from django.views.generic import ListView
-# # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView
+from .models import CustomerProfile
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
-# class ProfileView(ListView):
+# Create your views here.
+
+# class ProfileView(LoginRequiredMixin, ListView):
 #     context_object_name = 'profile_list' # for rememebering the name of object_list which we will use in templates
 #     model = CustomerProfile
 #     template_name = 'account/profile.html'
+#     fields = "__all__"
+  
+
+#     login_url = 'account_login'# new
+    
+class ProfileView2(LoginRequiredMixin, DetailView):
+    # context_object_name = 'profile_list' # for rememebering the name of object_list which we will use in templates
+    model = CustomerProfile
+    template_name = 'account/profile2.html'
+    fields = "__all__"
+  
+
+    login_url = 'account_login'# new
+
+    def get_object(self):
+        return get_object_or_404(CustomerProfile, pk=self.request.user.id)
+
+   
+
+class ProfileUpdateView(UpdateView): # new
+    model = CustomerProfile
+    template_name = 'account/ProfileEdit.html'
+    fields = ['full_name','contact_no','address','picture']
+
+    def get_object(self):
+        return get_object_or_404(CustomerProfile, pk=self.request.user.id)
 

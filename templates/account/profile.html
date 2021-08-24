@@ -17,48 +17,43 @@
     
     <title>{% block title %}Profile{% endblock title %}</title>
 
-  </head>
+ 
 
 
 {% block content %}
+<div class="container py-4 ">
+  <div class="row d-flex justify-content-center align-items-center ">
+    <div class="col-md-5">
+      <div class="card rounded-3 ">
+            <div class="card-body border-dark text-white"style="background-color: #000000;">
 
-<section id="blog" class="blog">
-    <div class="container py-4 ">
-        <div class="row d-flex justify-content-center align-items-center ">
-          <div class="col-md-5">
-   {% for profile in profile_list %}
-   <form class="row g-3">
-    <div class="col-md-6">
-      <label  class="form-label">Username</label>
-      <input class="form-control" id="inputEmail4">
-    </div>
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Full Name</label>
-      <input type="email" class="form-control" id="inputEmail4">
-    </div>
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Contact number</label>
-      <input type="email" class="form-control" id="inputEmail4">
-    </div>
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4">
-    </div>
-    <div class="col-12">
-      <label for="inputAddress" class="form-label">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
-  </form>
-  
-        {% endfor %}
-  
+              <div class="text-center p-0">
+                <img src="{% static 'images/logo1.png' %}"  width="15%" height="90" alt="logo">
+                <h4 class="name">Global.Chilli</h4>
+              </div>
+              <div class="p-0 card-text">
+
+{% for post in profile_list %}
+<div class="post-entry">
+  <h2><a href="{% url 'profile_detail' post.pk %}">{{ post.full_name }}</a></h2>
+
+<p>{{ post.contact_no }}</p>
+</div>
+{% endfor %}
+<div class="container py-4 ">
+  <div class="row d-flex justify-content-center align-items-center ">
+    <div class="col-md-5">
+      <div class="card rounded-3 ">
+            <div class="card-body border-dark text-white"style="background-color: #000000;">
+
+              <div class="text-center p-0">
+                <img src="{% static 'images/logo1.png' %}"  width="15%" height="90" alt="logo">
+                <h4 class="name">Global.Chilli</h4>
+              </div>
+              <div class="p-0 card-text">
   
 
-    </div>
-</section>
+   
 {% endblock content %}
 
 

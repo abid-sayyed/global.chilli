@@ -62,6 +62,7 @@
                 </a>
               </a>
               <ul class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'profile_detail' %}">profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
                 {% else %}
                 <li class="nav-item p-2 dropdown">

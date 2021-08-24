@@ -12,15 +12,18 @@ from .models import Feedback, Reservation
 class FeedbackView(LoginRequiredMixin,CreateView):
     model = Feedback
     template_name = 'services/GiveFeedback.html'
-    # fields = '__all__'
-    fields = ['full_name','quality_of_food', 'portion_size', 'ease_of_ordering','overall_value', 'suggestions',]
     login_url = 'account_login' # new
+    fields = ['full_name','quality_of_food', 'portion_size', 'ease_of_ordering','overall_value', 'suggestions',]
 
-    def username(request):
-        form = Feedback(request.POST)
-        post = form.save(commit=False)
-        post.customer = request.user
-        post.save()
+    def form_valid(self, form):
+        app_model = form.save(commit=False)
+        app_model.customer = self.request.user
+        # app_model.user = User.objects.get(user=self.request.user) # Or explicit model 
+        app_model.save()
+        return super().form_valid(form)
+
+
+
 
 
 

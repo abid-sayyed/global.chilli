@@ -28,6 +28,7 @@ urlpatterns = [
 
     #Local apps
     path('',include('pages.urls')),
+    path('account/',include('accounts.urls')),
 
     path('services/',include('services.urls')),
     path('core', include('core.urls')),
