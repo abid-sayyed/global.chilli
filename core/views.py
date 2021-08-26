@@ -1,14 +1,16 @@
+from accounts.models import CustomerProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, CreateView, TemplateView
 from django.utils import timezone
 from .models import (
     Item,
     Order,
-    OrderItem
+    OrderItem,
+    CustomerProfile,
 )
 # Create your views here.
 class HomeView(ListView):
@@ -31,7 +33,38 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an order")
-            return redirect("homeage")
+            return redirect("core:homeage")
+
+
+
+class CheckoutView(LoginRequiredMixin,CreateView):
+    model = Order
+    template_name = 'checkout.html'
+    login_url = 'account_login'
+    fields = ['payment_mode','Transaction_id','ordered','items']
+
+   
+
+
+    def form_valid(self, form):
+        app_model = form.save(commit=False)
+        app_model.user = self.request.user       
+        # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
+        app_model.profile = get_object_or_404(CustomerProfile, pk=self.request.user.id)
+        app_model.save()
+        return super().form_valid(form)
+
+
+class OrderView(LoginRequiredMixin, TemplateView):
+    # model = Order
+    template_name = 'OrderView.html'
+    # field = 'all'
+    login_url = 'account_login'
+
+    # def get_object(self):
+    #     return get_object_or_404(Order,pk = self.request.user.id)
+
+
 
 
 @login_required

@@ -4,13 +4,6 @@ from django.db.models.deletion import PROTECT
 from django.db.models.fields import EmailField
 
 # Create your models here.
-
-
-
-
-
-
-
 class RestaurantDetail(models.Model):
     
     RestaurantName = models.TextField(max_length=30)
@@ -43,8 +36,6 @@ class FoodMenu(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     
 
-
-
     
     def __str__(self):
         return self.title
@@ -60,13 +51,3 @@ class Gallery(models.Model):
     def __str__(self):
         return self.title
 
-
-
-   
-   
-        
-    # def Phone(self):
-    #     return self.employee.contact_no --not working
-
-   
-   

@@ -31,7 +31,7 @@ urlpatterns = [
     path('account/',include('accounts.urls')),
 
     path('services/',include('services.urls')),
-    path('core', include('core.urls')),
+    path('core/', include('core.urls')),
 
 
 

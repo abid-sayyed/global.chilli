@@ -39,3 +39,10 @@ class ProfileUpdateView(UpdateView): # new
     def get_object(self):
         return get_object_or_404(CustomerProfile, pk=self.request.user.id)
 
+    # def ProfilePicture(self):
+    #     return get_object_or_404(CustomerProfile, pp=self.request.picture)
+
+
+
+
+

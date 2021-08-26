@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
+from django.forms.models import modelformset_factory
 from django.shortcuts import reverse
+from accounts.models import CustomerProfile
 
 
 class Item(models.Model):
@@ -52,21 +54,79 @@ class OrderItem(models.Model):
         if self.item.discount_price:
             return self.get_discount_item_price()
         return self.get_total_item_price()
+
+        
     
+def all_item():
+    ItemList = OrderItem.objects.all()
+    return ItemList
     
 
 class Order(models.Model):
+    PAYMENT_CHOICES = [
+        ('cod','Cash On Delivery'),
+        ('upi','UPI'),
+        ('googlepay','GPay'),
+        ('paytm','Paytm'),
+        ('banktransfer','Bank Transfer'),
+        
+        ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField(OrderItem)
+    items = models.ManyToManyField(OrderItem,default= all_item)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(auto_now_add = True)
     ordered = models.BooleanField(default=False)
+    payment_mode = models.CharField(max_length=20,choices= PAYMENT_CHOICES,blank= True)
+    Transaction_id = models.CharField(max_length = 30,blank= True)
+    profile  =  models.ForeignKey(CustomerProfile, on_delete= models.CASCADE,blank= True,null = True)
+    confirm = models.BooleanField(default=True)
+
+
 
     def __str__(self):
         return self.user.username
+
+
+
+    def user_email(self):
+        return self.user.email
+
+    def customer_full_name(self):
+        if not self.profile:
+            return None
+        return self.profile.full_name
+
+  
+    def contact_no(self):
+        if not self.profile:
+            return None
+        return self.profile.contact_no
+
+    def customer_address(self):
+        if not self.profile:
+            return None
+        return self.profile.address
+
+
+    # def __str__(self):
+    #     if not self.author:
+    #         return "Anonymous"
+    #     return self.author.username
+
+
+   
+
+    def item_list(self):
+        return [p.item for p in self.items.all()]
+
     
     def get_total_price(self):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+
+
+
+    def get_absolute_url(self):
+        return reverse('ThankyouFeedback')
