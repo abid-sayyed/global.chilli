@@ -45,18 +45,23 @@ class CheckoutView(LoginRequiredMixin,CreateView):
     login_url = 'account_login'
     fields = ['payment_mode','Transaction_id','ordered','items']
 
-   
 
 
     def form_valid(self, form):
-        app_model = form.save(commit=False)
-        app_model.user = self.request.user
-        profile = CustomerProfile.objects.get(profile_username=self.request.user)
-     
-        # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
-        app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
-        app_model.save()
-        return super().form_valid(form)
+        try:
+            app_model = form.save(commit=False)
+            app_model.user = self.request.user
+            profile = CustomerProfile.objects.get(profile_username=self.request.user)
+            # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
+            app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
+            app_model.save()
+            return super().form_valid(form)
+        except CustomerProfile.DoesNotExist:
+            messages.error(self.request, "you did not fill the profile detail yet,please fill it before proceeding")
+            return redirect("profile_create")
+
+
+
 
 
 class OrderListView(LoginRequiredMixin, ListView):
