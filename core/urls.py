@@ -7,13 +7,13 @@ from .views import (
     HomeView,
     OrderSummaryView,
     CheckoutView,
-    OrderView,
+    OrderListView,
 )
 
 app_name = 'core'
 
 urlpatterns = [
-    path('my-order/', OrderView.as_view(), name='my-order'),
+    path('my-order/', OrderListView.as_view(), name='my-order'),
     path('homage/', HomeView.as_view(), name='homeage'),
     path('product/<pk>/', ProductView.as_view(), name='product'),
     path('order-summary', OrderSummaryView.as_view(), name='order-summary'),

@@ -27,18 +27,23 @@ class ProfileView2(LoginRequiredMixin, DetailView):
     login_url = 'account_login'# new
 
     def get_object(self):
-        return get_object_or_404(CustomerProfile, pk=self.request.user.id)
+        profile = CustomerProfile.objects.get(profile_username=self.request.user)
+        return get_object_or_404(CustomerProfile, pk=profile.id)
 
    
 
 class ProfileUpdateView(UpdateView): # new
     model = CustomerProfile
     template_name = 'account/ProfileEdit.html'
-    fields = ['full_name','contact_no','address','picture']
+    fields = ['full_name','contact_no','address','picture',]
+
 
     def get_object(self):
-        return get_object_or_404(CustomerProfile, pk=self.request.user.id)
+        places = CustomerProfile.objects.get(profile_username=self.request.user)
+        return get_object_or_404(CustomerProfile, pk=places.id)
 
+
+  
     # def ProfilePicture(self):
     #     return get_object_or_404(CustomerProfile, pp=self.request.picture)
 

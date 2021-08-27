@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
 
 
 class CustomerProfile(models.Model):
-    profile_username= models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    profile_username= models.OneToOneField(get_user_model(), on_delete=models.CASCADE,blank= True)
     picture = models.ImageField(upload_to='ProfilePicture/', blank=True) # have used pillow for this
     full_name= models.CharField(max_length= 100,blank= True)
     contact_no =models.CharField( max_length=10,blank =True)

@@ -117,7 +117,16 @@ class Order(models.Model):
    
 
     def item_list(self):
-        return [p.item for p in self.items.all()]
+        return [p for p in self.items.all()]
+
+    # def item_list(self):
+    #     for p in self.items.all():
+    #         return  p
+
+
+    # def item_list(self):
+    #     return [p.item for p in self.items.all()]
+
 
     
     def get_total_price(self):
@@ -129,4 +138,4 @@ class Order(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('ThankyouFeedback')
+        return reverse('core:my-order')

@@ -35,7 +35,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
             messages.error(self.request, "You do not have an order")
             return redirect("core:homeage")
 
-
+ # def item_list(self):
+    #     for p in self.items.all():
+    #       return  p
 
 class CheckoutView(LoginRequiredMixin,CreateView):
     model = Order
@@ -48,21 +50,23 @@ class CheckoutView(LoginRequiredMixin,CreateView):
 
     def form_valid(self, form):
         app_model = form.save(commit=False)
-        app_model.user = self.request.user       
+        app_model.user = self.request.user
+        profile = CustomerProfile.objects.get(profile_username=self.request.user)
+     
         # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
-        app_model.profile = get_object_or_404(CustomerProfile, pk=self.request.user.id)
+        app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
         app_model.save()
         return super().form_valid(form)
 
 
-class OrderView(LoginRequiredMixin, TemplateView):
-    # model = Order
+class OrderListView(LoginRequiredMixin, ListView):
+    model = Order
     template_name = 'OrderView.html'
-    # field = 'all'
+    field = 'all'
     login_url = 'account_login'
 
-    # def get_object(self):
-    #     return get_object_or_404(Order,pk = self.request.user.id)
+    def get_object(self):
+        return get_object_or_404(Order,pk = self.request.user.id)
 
 
 

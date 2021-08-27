@@ -1,1 +1,108 @@
-<h1>hiiiiiiiiiiiiii</h1>
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+
+  <!-- Bootstrap CSS -->
+
+  <title>{% block title %}My Orders{% endblock title %}</title>
+
+
+
+
+  {% block content %}
+
+  <div class="container pt-5 py-4">
+    <div class="main-body">
+
+      {% for post in object_list reversed %}
+      <div class="row gutters-sm">
+
+        <div class="col-md-8 pb-3 ">
+          <div class="card pb-3 mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Order Date and Time</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{post.start_date}} 
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Item</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+
+                  {% for tag in post.items.all %}
+                  {{ tag }},
+                  {% endfor %}
+                  
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Total Amount</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  &#8377 {{post.get_total_price}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Address</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{post.customer_address}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Phone number and mail Id</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{post.contact_no}} / {{post.user_email}}
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <a class="btn btn-info " href="#">Back</a>
+      </div>
+    </div>
+  </div>
+
+    
+
+  <hr>
+
+
+
+  {% endblock content %}
+
+
+
+
+</html>

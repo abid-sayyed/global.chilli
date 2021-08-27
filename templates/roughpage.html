@@ -1670,3 +1670,66 @@
 
 # Profile: CustomerProfile object (1)
 # Profile: CustomerProfile object (2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- def form_valid(self, form):
+        app_model = form.save(commit=False)
+        app_model.user = self.request.user
+        profile = CustomerProfile.objects.get(profile_username=self.request.user)
+     
+        # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
+        app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
+        app_model.save()
+        return super().form_valid(form) -->
+
+
+
+
+
+
+
+    def form_valid(self, form):
+    try:
+        app_model = form.save(commit=False)
+        app_model.user = self.request.user
+        profile = CustomerProfile.objects.get(profile_username=self.request.user)  
+      # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
+        app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
+        app_model.save()
+        return super().form_valid(form)
+
+
+    except ObjectDoesNotExist:
+        messages.error(self.request, "You did not fill your profile detail")
+        return redirect("profile_detail")
