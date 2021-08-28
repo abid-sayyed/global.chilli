@@ -32,12 +32,14 @@
                   </div>
                   <div class="pb-4 card-text">
                   <h2>Profile Update</h2>
+                  <P>want to update your detail?</P>
                   <!-- <div class=" bottompadding pb-3"></div> -->
 
                   </div>
                   <form action= "" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <p>(profile picture can be blank)</p>
                     <!-- <input type="submit" value="Save" /> -->
                     <div class=" bottompadding pb-3"></div>
                     <button class="btn btn-outline-success me-md-2 " type="submit" value= "update">update</button>

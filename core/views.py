@@ -6,6 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View, CreateView, TemplateView
 from django.utils import timezone
+# from extra_views import ModelFormSetView
+
 from .models import (
     Item,
     Order,
@@ -48,17 +50,16 @@ class CheckoutView(LoginRequiredMixin,CreateView):
 
 
     def form_valid(self, form):
-        try:
-            app_model = form.save(commit=False)
-            app_model.user = self.request.user
-            profile = CustomerProfile.objects.get(profile_username=self.request.user)
-            # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
-            app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
-            app_model.save()
-            return super().form_valid(form)
-        except CustomerProfile.DoesNotExist:
-            messages.error(self.request, "you did not fill the profile detail yet,please fill it before proceeding")
-            return redirect("profile_create")
+        app_model = form.save(commit=False)
+        app_model.user = self.request.user
+        profile = CustomerProfile.objects.get(profile_username=self.request.user)
+        # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
+        app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
+        app_model.save()
+        return super().form_valid(form)
+        # except CustomerProfile.DoesNotExist:
+        #     messages.error(self.request, "you did not fill the profile detail yet,please fill it before proceeding")
+        #     return redirect("profile_create")
 
 
 

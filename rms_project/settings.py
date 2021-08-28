@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms', # new
     'allauth',
     'allauth.account',
+    'extra_views',    # from pipenv install django-extra-views for adding two model form in one view
 
 
 

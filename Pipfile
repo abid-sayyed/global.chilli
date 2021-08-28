@@ -10,6 +10,7 @@ pillow = "*"
 typing-extensions = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
+django-extra-views = "*"
 
 [dev-packages]
 
