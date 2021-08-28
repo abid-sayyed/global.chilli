@@ -11,6 +11,21 @@ from django.contrib import messages
 
 
 
+
+# for creating instance (means pk) for CustomerProfile model automatically using singals
+
+from allauth.account.signals import user_signed_up
+from django.dispatch import receiver 
+from . models import  CustomerProfile
+
+@receiver(user_signed_up)
+def new_user_signup(sender, **kwargs):
+    p = CustomerProfile(profile_username = kwargs['user'])
+    p.save()
+
+
+
+
 # Create your views here.
 
 # class ProfileView(LoginRequiredMixin, ListView):
@@ -59,11 +74,8 @@ class ProfileView2(LoginRequiredMixin, DetailView):
     login_url = 'account_login'# new
     
     def get_object(self):
-        try:
             profile = CustomerProfile.objects.get(profile_username=self.request.user)
             return get_object_or_404(CustomerProfile, pk=profile.id)
-        except:
-            return redirect('profile_create')
 
             # messages.error(self.request, "you did not fill the profile detail")
             # return redirect("profile_create")
