@@ -56,7 +56,7 @@ class OrderItem(models.Model):
         return self.get_total_item_price()
 
         
-    
+# for selecting all order-product by default---- use this in item field like : default= all_item
 def all_item():
     ItemList = OrderItem.objects.all()
     return ItemList

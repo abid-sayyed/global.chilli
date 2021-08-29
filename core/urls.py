@@ -3,8 +3,8 @@ from .views import (
     remove_from_cart,
     reduce_quantity_item,
     add_to_cart,
-    ProductView,
-    HomeView,
+    ProductDetailView,
+    ProductListView,
     OrderSummaryView,
     CheckoutView,
     OrderListView,
@@ -14,8 +14,8 @@ app_name = 'core'
 
 urlpatterns = [
     path('my-order/', OrderListView.as_view(), name='my-order'),
-    path('homage/', HomeView.as_view(), name='homeage'),
-    path('product/<pk>/', ProductView.as_view(), name='product'),
+    path('ProductList/', ProductListView.as_view(), name='product-list'),
+    path('product-detail/<pk>/', ProductDetailView.as_view(), name='product'),
     path('order-summary', OrderSummaryView.as_view(), name='order-summary'),
     path('add-to-cart/<pk>/', add_to_cart, name='add-to-cart'),
     path('remove-from-cart/<pk>/', remove_from_cart, name='remove-from-cart'),

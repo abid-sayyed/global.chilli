@@ -42,9 +42,9 @@
                 <time class="px-2 bi bi-phone fw-lighter"> &nbsp +91 5555 9999 </time>
 
                 <div class="pt-5 pb-5 d-grid gap-4 d-md-flex  justify-content-md-start">
-                  <a href= "{% url 'core:homeage' %}" class="btn btn-outline-danger me-md-2" type="button">ORDER ONLINE</a>
+                  <a href= "{% url 'core:product-list' %}" class="btn btn-outline-danger me-md-2" type="button">ORDER ONLINE</a>
                   <a href= "{% url 'reservation' %}" class="btn btn-outline-danger me-md-2" type="button">RESERVATIONS</a>               
-                  <a href="{% url 'menu' %}" class="btn btn-outline-danger me-md-2 " type="button">&nbsp&nbsp&nbsp&nbspMENU&nbsp&nbsp&nbsp&nbsp</a>
+                  <a href="{% url 'core:product-list' %}" class="btn btn-outline-danger me-md-2 " type="button">&nbsp&nbsp&nbsp&nbspMENU&nbsp&nbsp&nbsp&nbsp</a>
                   <a href="{% url 'feedback'%}" class="btn btn-outline-danger" type="button">GIVE FEEDBACK</a>
                 </div>
     
@@ -80,7 +80,7 @@
                
              {% endfor%}
              <div class="p-3 pt-0 d-grid  d-md-flex  justify-content-md-start">
-              <a href="{% url 'core:homeage' %}" class="btn btn-outline-danger" type="button">More...</a>
+              <a href="{% url 'core:product-list' %}" class="btn btn-outline-danger" type="button">More...</a>
             </div>
 
 

@@ -26,7 +26,7 @@ class GalleryPageView(ListView):
     template_name = 'pages/gallery.html'
 
 
-class MenuPageView(ListView):
-    context_object_name = 'FoodMenu_list' # for rememebering the name of object_list which we will use in templates
-    model = FoodMenu
-    template_name = 'pages/menu.html'
+# class MenuPageView(ListView):
+#     context_object_name = 'FoodMenu_list' # for rememebering the name of object_list which we will use in templates
+#     model = FoodMenu
+#     template_name = 'pages/menu.html'

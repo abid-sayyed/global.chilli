@@ -1,18 +1,21 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import UpdateView
 from .models import CustomerProfile
-from django.views.generic import CreateView, ListView, UpdateView, DetailView
+from django.views.generic import UpdateView, DetailView
 from django.shortcuts import get_object_or_404
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib import messages
+
+# using this for try-except exception
+
+# from django.shortcuts import redirect, render
+# from django.contrib.auth import get_user_model
+# from django.core.exceptions import ObjectDoesNotExist
+# from django.contrib import messages
 
 
 
 
 
-# for creating instance (means pk) for CustomerProfile model automatically using singals
+# for creating instance (here means pk) for CustomerProfile model automatically using singals
 
 from allauth.account.signals import user_signed_up
 from django.dispatch import receiver 
@@ -24,92 +27,39 @@ def new_user_signup(sender, **kwargs):
     p.save()
 
 
+#using signal instead of this
 
-
-# Create your views here.
-
-# class ProfileView(LoginRequiredMixin, ListView):
-#     context_object_name = 'profile_list' # for rememebering the name of object_list which we will use in templates
+# class ProfileCreateView(CreateView): # new
 #     model = CustomerProfile
-#     template_name = 'account/profile.html'
-#     fields = "__all__"
-  
-
-#     login_url = 'account_login'# new
+#     template_name = 'account/ProfileCreate.html'
+#     fields = ['full_name','contact_no','address','picture',]
 
 
-
-class ProfileCreateView(CreateView): # new
-    model = CustomerProfile
-    template_name = 'account/ProfileCreate.html'
-    fields = ['full_name','contact_no','address','picture',]
-
-    # def get_object(self):
-    #     places = CustomerProfile.objects.get(profile_username=self.request.user)
-    #     return get_object_or_404(CustomerProfile, pk=places.id)
-
-    def form_valid(self, form):
-        app_model = form.save(commit=False)
-        app_model.profile_username = self.request.user
-        # profile = CustomerProfile.objects.get(profile_username=self.request.user)
-     
-        # app_model.profile =Order.object.get(profile=self.request.CustomerProfile)# Or explicit model 
-        # app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
-        app_model.save()
-        return super().form_valid(form)
-
-
-
-
-    # def get_object(self):
-    #     profile = CustomerProfile.objects.get(profile_username=self.request.user)
-    #     return get_object_or_404(CustomerProfile, pk=profile.id)
+#     def form_valid(self, form):
+#         app_model = form.save(commit=False)
+#         app_model.profile_username = self.request.user
+#         app_model.save()
+#         return super().form_valid(form)
 
     
-class ProfileView2(LoginRequiredMixin, DetailView):
-    # context_object_name = 'profile_list' # for rememebering the name of object_list which we will use in templates
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = CustomerProfile
-    template_name = 'account/profile2.html'
+    template_name = 'account/profile.html'
     fields = "__all__"  
-    login_url = 'account_login'# new
+    login_url = 'account_login'  #for sending to login page if not login -- using LoginrequiredMixin for this
     
     def get_object(self):
             profile = CustomerProfile.objects.get(profile_username=self.request.user)
             return get_object_or_404(CustomerProfile, pk=profile.id)
 
-            # messages.error(self.request, "you did not fill the profile detail")
-            # return redirect("profile_create")
-            
 
-
-
-
-
-
-   
-
-class ProfileUpdateView(UpdateView): # new
+class ProfileUpdateView(UpdateView): 
     model = CustomerProfile
     template_name = 'account/ProfileEdit.html'
     fields = ['full_name','contact_no','address','picture',]
 
 
     def get_object(self):
-        try:
-            places = CustomerProfile.objects.get(profile_username=self.request.user)
-            return get_object_or_404(CustomerProfile, pk=places.id)
-        except ObjectDoesNotExist:
-            messages.error(self.request, "you did not fill the profile detail yet ,please fill it before proceeding further")
-            return redirect('profile_create')
-        except:
-            redirect('profile_create')
-
-
-  
-    # def ProfilePicture(self):
-    #     return get_object_or_404(CustomerProfile, pp=self.request.picture)
-
-
-
-
+        places = CustomerProfile.objects.get(profile_username=self.request.user)
+        return get_object_or_404(CustomerProfile, pk=places.id)
 

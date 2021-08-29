@@ -1,10 +1,10 @@
-from accounts.models import CustomerProfile
+from accounts.models import CustomUser, CustomerProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, View, CreateView, TemplateView
+from django.views.generic import ListView, DetailView, View, CreateView
 from django.utils import timezone
 # from extra_views import ModelFormSetView
 
@@ -15,14 +15,14 @@ from .models import (
     CustomerProfile,
 )
 # Create your views here.
-class HomeView(ListView):
+class ProductListView(ListView):
     model = Item
-    template_name = "homeage.html"
+    template_name = "core/ProductList.html"
 
 
-class ProductView(DetailView):
+class ProductDetailView(DetailView):
     model = Item
-    template_name = "product.html"
+    template_name = "core/ProductDetail.html"
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -32,10 +32,10 @@ class OrderSummaryView(LoginRequiredMixin, View):
             context = {
                 'object' : order
             }
-            return render(self.request, 'order_summary.html', context)
+            return render(self.request, 'core/order_summary.html', context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an order")
-            return redirect("core:homeage")
+            return redirect("core:product-list")
 
  # def item_list(self):
     #     for p in self.items.all():
@@ -43,7 +43,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
 
 class CheckoutView(LoginRequiredMixin,CreateView):
     model = Order
-    template_name = 'checkout.html'
+    template_name = 'core/checkout.html'
     login_url = 'account_login'
     fields = ['payment_mode','Transaction_id','ordered','items']
 
@@ -57,23 +57,24 @@ class CheckoutView(LoginRequiredMixin,CreateView):
         app_model.profile = get_object_or_404(CustomerProfile, pk=profile.id)
         app_model.save()
         return super().form_valid(form)
-        # except CustomerProfile.DoesNotExist:
-        #     messages.error(self.request, "you did not fill the profile detail yet,please fill it before proceeding")
-        #     return redirect("profile_create")
-
-
 
 
 
 class OrderListView(LoginRequiredMixin, ListView):
+    context_object_name = 'order_list'
     model = Order
-    template_name = 'OrderView.html'
+    template_name = 'core/OrderView.html'
     field = 'all'
     login_url = 'account_login'
 
-    def get_object(self):
-        return get_object_or_404(Order,pk = self.request.user.id)
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user)  #(override this because I want to show only list of login user)
 
+
+    # def get_queryset(self):
+    #     return self.model.objects.filter(
+    #         user=self.request.user
+    #     ).order_by('-start_date')
 
 
 
