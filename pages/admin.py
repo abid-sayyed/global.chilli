@@ -6,7 +6,7 @@ from .models import FoodMenu, Gallery, HomepageMenu, RestaurantDetail
 
 class HomepageMenuAdmin(admin.ModelAdmin):
     model = FoodMenu
-    list_display = ['foodmenu','title','price']
+    list_display = ['home_picture_first','title_first','home_picture_second','title_second','home_picture_third','title_third','foodmenu','title','price']
 
 class FoodMenuAdmin(admin.ModelAdmin):
     model = FoodMenu
