@@ -11,6 +11,9 @@ typing-extensions = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
 django-extra-views = "*"
+gunicorn = "*"
+django-environ = "*"
+whitenoise = "*"
 
 [dev-packages]
 
