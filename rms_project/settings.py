@@ -9,6 +9,14 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import environ
+
+env = environ.Env(
+    DEBUG=(bool, False)
+    )
+
+environ.Env.read_env()
+
 
 from pathlib import Path
 
@@ -20,10 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^8&+d90-+ydhkl*#gyoaeph0u!(gq-!&3v690ta(d(_x%3i+5$'
+# SECRET_KEY = 'django-insecure-^8&+d90-+ydhkl*#gyoaeph0u!(gq-!&3v690ta(d(_x%3i+5$'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = True
+DEBUG = env('DEBUG')
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -96,9 +107,9 @@ WSGI_APPLICATION = 'rms_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rms_project',
-        'USER': 'abid',
-        'PASSWORD': 'rms123',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
