@@ -31,5 +31,4 @@ class RestaurantDetailAdmin(admin.ModelAdmin):
 
 admin.site.register(HomepageMenu, HomepageMenuAdmin)
 admin.site.register(RestaurantDetail,RestaurantDetailAdmin)
-admin.site.register(FoodMenu,FoodMenuAdmin)
 admin.site.register(Gallery,GalleryAdmin)

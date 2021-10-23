@@ -13,7 +13,7 @@
 
 
     <!-- Bootstrap CSS -->
-    
+
     <title>{% block title %}About Us{% endblock title %}</title>
 
   </head>
@@ -30,12 +30,12 @@
                   <div class="col-md-4">
                     <!-- <img class="foodimage" src="{{ About_page.AboutPicture.url}}" alt="{{ listofpic.title }}" width="100%" height="230" > -->
 
-                    <img src="{{ ListOfDetail.AboutPicture.url}}" class="img " alt="about us"width="100%" height="325">
+                    <img src="{{ ListOfDetail.AboutPicture.url}}" class="img " alt="about us"width="100%" height="520">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title">{{ ListOfDetail.TagLine }}</h5>
-                      <p class="card-text"> {{ ListOfDetail.Discription }}</p>
+                      <h2 class="card-title pb-3  fw-bold" >{{ ListOfDetail.TagLine }}</h2>
+                      <p class="card-text fst-italic lg-base "> {{ ListOfDetail.Discription }}</p>
                       <p class="card-text"><small class="text-muted">{{ About_page.TagLine }}</small></p>
                     </div>
                   </div>
@@ -47,13 +47,13 @@
 
 
         </div>
-     
+
      </div>
-    
+
   </body>
     {% endblock content %}
 
 
 
-    
+
 </html>
